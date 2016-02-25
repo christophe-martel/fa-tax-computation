@@ -7,6 +7,7 @@ import cma.fa.tc.impl.business.entity.order.TcPricedOrder;
 import cma.fa.tc.impl.utils.files.SimpleCsvReader;
 import java.util.AbstractMap;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -62,7 +63,7 @@ public class Orders extends Base<PricedOrder> {
                 ;
             })
             .filter(sp -> null != sp)
-            .collect(Collectors.toSet())
+            .collect(Collectors.toCollection(LinkedHashSet::new))
         ;
     }
     

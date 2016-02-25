@@ -63,7 +63,7 @@ public class SimpleProducts extends Base<SimpleProduct> {
                 ;
             })
             .filter(sp -> null != sp)
-            .collect(Collectors.toSet())
+            .collect(Collectors.toCollection(LinkedHashSet::new))
         ;
     }
     

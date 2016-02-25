@@ -8,6 +8,7 @@ package cma.fa.tc.impl.business.service.repository;
 import cma.fa.tc.def.business.entity.Tax;
 import cma.fa.tc.impl.business.entity.tax.SimpleTax;
 import cma.fa.tc.impl.utils.files.SimpleCsvReader;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -39,7 +40,7 @@ public class Taxes extends Base<Tax> {
                     line.get(0),
                     Float.parseFloat(line.get(1)));
             })
-            .collect(Collectors.toSet())
+            .collect(Collectors.toCollection(LinkedHashSet::new))
         ;
         
     }
