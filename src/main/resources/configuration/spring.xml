@@ -14,8 +14,8 @@
     <aop:aspectj-autoproxy />
     
     <import resource="classpath:configuration/included/utils.xml" />
-    <import resource="classpath:configuration/included/repositories.xml" />
     <import resource="classpath:configuration/included/calculators.xml" />
+    <import resource="classpath:configuration/included/repositories.xml" />
     <import resource="classpath:configuration/included/builders.xml" />
     
 </beans>

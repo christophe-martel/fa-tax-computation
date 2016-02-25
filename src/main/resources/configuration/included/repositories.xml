@@ -16,4 +16,24 @@
     <aop:aspectj-autoproxy />
     
     
+    <bean   id="repository.taxes"
+            class="cma.fa.tc.impl.business.service.repository.Taxes"
+            scope="prototype" >
+        <constructor-arg ref="utils.reader.taxes" />
+    </bean>
+    
+    <bean   id="repository.products"
+            class="cma.fa.tc.impl.business.service.repository.SimpleProducts"
+            scope="prototype" >
+        <constructor-arg ref="utils.reader.products" />
+        <constructor-arg ref="builder.product.simple" />
+    </bean>
+    
+    <bean   id="repository.orders"
+            class="cma.fa.tc.impl.business.service.repository.Orders"
+            scope="prototype" >
+        <constructor-arg ref="utils.reader.orders" />
+        <constructor-arg ref="builder.order" />
+    </bean>
+    
 </beans>

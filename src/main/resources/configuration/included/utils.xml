@@ -15,5 +15,32 @@
     <context:component-scan base-package="cma.fa.tc" />
     <aop:aspectj-autoproxy />
     
+    <bean   id="utils.math.rounder.nearest"
+            class="cma.fa.tc.impl.utils.math.NearestRound"
+            scope="prototype" >
+        <constructor-arg type="double" value="0.05" />
+    </bean>
+    
+    <bean   id="utils.math.rounder.no"
+            class="cma.fa.tc.impl.utils.math.NoRound"
+            scope="prototype" />
+    
+    <bean   id="utils.reader.taxes"
+            class="cma.fa.tc.impl.utils.files.SimpleCsvReader"
+            scope="prototype" >
+        <constructor-arg type="java.lang.String" value="/data/taxes.csv" />
+    </bean>
+    
+    <bean   id="utils.reader.products"
+            class="cma.fa.tc.impl.utils.files.SimpleCsvReader"
+            scope="prototype" >
+        <constructor-arg type="java.lang.String" value="/data/products.csv" />
+    </bean>
+    
+    <bean   id="utils.reader.orders"
+            class="cma.fa.tc.impl.utils.files.SimpleCsvReader"
+            scope="prototype" >
+        <constructor-arg type="java.lang.String" value="/data/orders.csv" />
+    </bean>
     
 </beans>

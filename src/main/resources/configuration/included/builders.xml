@@ -15,5 +15,31 @@
     <context:component-scan base-package="cma.fa.tc" />
     <aop:aspectj-autoproxy />
     
+    <bean   id="builder.product.simple"
+            class="cma.fa.tc.impl.business.builder.product.SimpleBuilder"
+            scope="prototype" >
+        <constructor-arg ref="repository.taxes" />
+    </bean>
+    
+    <bean   id="builder.product.priced"
+            class="cma.fa.tc.impl.business.builder.product.PricedBuilder"
+            scope="prototype" >
+        <constructor-arg ref="calculator.price.product" />
+    </bean>
+    
+    <bean   id="builder.order.line"
+            class="cma.fa.tc.impl.business.builder.order.LineBuilder"
+            scope="prototype" >
+        <constructor-arg ref="builder.product.priced" />
+        <constructor-arg ref="calculator.price.line" />
+    </bean>
+    
+    <bean   id="builder.order"
+            class="cma.fa.tc.impl.business.builder.order.OrderBuilder"
+            scope="prototype" >
+        <constructor-arg ref="builder.order.line" />
+        <constructor-arg ref="repository.products" />
+        <constructor-arg ref="calculator.price.lines" />
+    </bean>
     
 </beans>

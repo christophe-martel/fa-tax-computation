@@ -15,5 +15,18 @@
     <context:component-scan base-package="cma.fa.tc" />
     <aop:aspectj-autoproxy />
     
+    <bean   id="calculator.price.product"
+            class="cma.fa.tc.impl.business.service.calculator.price.TcProductPriceCalculator"
+            scope="prototype" >
+        <constructor-arg ref="utils.math.rounder.nearest" />
+    </bean>
     
+    <bean   id="calculator.price.line"
+            class="cma.fa.tc.impl.business.service.calculator.price.TcLinePriceCalculator"
+            scope="prototype" />
+    
+    <bean   id="calculator.price.lines"
+            class="cma.fa.tc.impl.business.service.calculator.price.TcLinesPriceCalculator"
+            scope="prototype" />
+
 </beans>
