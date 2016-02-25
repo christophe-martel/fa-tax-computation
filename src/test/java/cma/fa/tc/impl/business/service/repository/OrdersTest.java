@@ -60,6 +60,11 @@ public class OrdersTest extends TestCase {
         
         assertEquals(3, orders.all().size());
         
+        OrdersTest.executeAll(orders);
+        
+    }
+    
+    public static void executeAll (Orders orders) {
         
         Stream.of(
                 "Input 1:1.5f:29.83f",
@@ -82,6 +87,6 @@ public class OrdersTest extends TestCase {
             })
         ;
     }
-
+    
     
 }
