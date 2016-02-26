@@ -10,7 +10,7 @@
 ## How to use
 ### Run the program
 #### "La RACHE" method
-Cf. http://www.byatoo.com/la-rache/
+See [International Institute of La RACHE](http://www.la-rache.com/)
 * `mvn exec:java`
 
 #### Step by step
@@ -30,7 +30,7 @@ Cf. http://www.byatoo.com/la-rache/
 
 # Help
 If it fail, don't be afraid to use the green powder
-Cf. http://www.poudreverte.org/
+See [La poudre verte](http://www.poudreverte.org)
 
 
 # History
@@ -44,6 +44,6 @@ Cf. http://www.poudreverte.org/
 
 ### Version 1.1
 * First release
-# Installation & test
+* Installation & test
 
 
