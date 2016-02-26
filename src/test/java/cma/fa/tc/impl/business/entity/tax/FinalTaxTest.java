@@ -5,6 +5,7 @@
  */
 package cma.fa.tc.impl.business.entity.tax;
 
+import cma.fa.tc.impl.business.entity.invoice.FinalTax;
 import cma.fa.tc.def.business.entity.Tax;
 import java.time.LocalDateTime;
 import java.util.Arrays;

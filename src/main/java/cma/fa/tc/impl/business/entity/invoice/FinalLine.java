@@ -15,39 +15,47 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cma.fa.tc.impl.business.entity.order;
+package cma.fa.tc.impl.business.entity.invoice;
 
 
-import cma.fa.tc.def.business.entity.PricedProduct;
+import cma.fa.tc.def.business.entity.Historisable;
 import cma.fa.tc.def.business.entity.Line;
 import cma.fa.tc.def.business.entity.Price;
 import cma.fa.tc.def.business.entity.PricedLine;
+import cma.fa.tc.def.business.entity.PricedProduct;
+import cma.fa.tc.def.business.entity.Product;
+import cma.fa.tc.impl.business.entity.order.TcPricedLine;
+import java.time.LocalDateTime;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+
 
 /**
  *
  * @author Christophe Martel <mail.christophe.martel@gmail.com>
  */
-@EqualsAndHashCode(of={"product"}, callSuper = true)
+@EqualsAndHashCode(of={"createdAt"}, callSuper=true)
 @ToString
 @Slf4j
-public class TcPricedLine extends TcLine implements PricedLine {
-    
+public class FinalLine extends TcPricedLine implements Historisable {
     @Accessors(chain = true, fluent = true)
     @Getter
-    private final Price price;
+    private final LocalDateTime createdAt;
     
-    public TcPricedLine (Line line, Price price) {
-        this(line.product(), line.quantity(), price);
+    
+    public FinalLine (PricedLine line, LocalDateTime createdAt) {
+        this(
+            new FinalProduct(line.product(), createdAt),
+            line.quantity(),
+            line.price(),
+            createdAt);
     }
     
-    public TcPricedLine (PricedProduct product, int quantity, Price price) {
-        super(product, quantity);
-        this.price = price;
+    public FinalLine (PricedProduct product, int quantity, Price price, LocalDateTime createdAt) {
+        super(product, quantity, price);
+        this.createdAt = createdAt;
     }
-    
 }

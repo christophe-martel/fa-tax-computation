@@ -15,15 +15,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cma.fa.tc.impl.business.entity.tax;
+package cma.fa.tc.impl.business.entity.invoice;
 
 
-import cma.fa.tc.impl.business.entity.TcTax;
-import cma.fa.tc.def.business.entity.Tax;
+import cma.fa.tc.def.business.entity.Invoice;
+import cma.fa.tc.def.business.entity.Price;
+import cma.fa.tc.def.business.entity.PricedLine;
+import cma.fa.tc.def.business.entity.PricedOrder;
+import cma.fa.tc.impl.business.entity.order.TcPricedOrder;
 import java.time.LocalDateTime;
-import lombok.ToString;
+import java.util.Set;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,26 +36,26 @@ import lombok.extern.slf4j.Slf4j;
  *
  * @author Christophe Martel <mail.christophe.martel@gmail.com>
  */
-@EqualsAndHashCode(of={"createdAt"}, callSuper=true)
-@ToString(callSuper=true)
+@EqualsAndHashCode(of={"createdAt"}, callSuper = true)
+@ToString
 @Slf4j
-public class FinalTax extends TcTax {
+public class TcInvoice extends TcPricedOrder implements Invoice {
     
     @Accessors(chain = true, fluent = true)
     @Getter
     private final LocalDateTime createdAt;
     
-    public FinalTax (String code, float rate, LocalDateTime createdAt) {
-        super(code, rate);
+    public TcInvoice (String number, Set<PricedLine> lines, Price price, LocalDateTime createdAt) {
+        super(number, lines, price);
         this.createdAt = createdAt;
     }
     
-    public FinalTax (Tax tax, LocalDateTime createdAt) {
-        this(tax.code(), tax.rate(), createdAt);
+    public TcInvoice (PricedOrder order, LocalDateTime createdAt) {
+        this(order.number(), order.lines(), order.price(), createdAt);
     }
     
-    public FinalTax (Tax tax) {
-        this(tax.code(), tax.rate(), LocalDateTime.now());
+    public TcInvoice (PricedOrder order) {
+        this(order.number(), order.lines(), order.price(), LocalDateTime.now());
     }
     
 }

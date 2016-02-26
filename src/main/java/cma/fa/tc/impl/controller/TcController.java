@@ -19,6 +19,7 @@ package cma.fa.tc.impl.controller;
 
 import cma.fa.tc.def.utils.exception.TcException;
 import cma.fa.tc.def.controller.Controller;
+import cma.fa.tc.impl.business.builder.invoice.InvoiceBuilder;
 import cma.fa.tc.impl.business.service.repository.Orders;
 import java.time.Clock;
 import lombok.extern.slf4j.Slf4j;
@@ -32,12 +33,15 @@ public class TcController implements Controller {
     
     private final Orders orders;
     
+    private final InvoiceBuilder invoiceBuilder;
+    
     private long startTime;
     
     private long endTime;
     
-    public TcController (Orders orders) {
+    public TcController (Orders orders, InvoiceBuilder invoiceBuilder) {
         this.orders = orders;
+        this.invoiceBuilder = invoiceBuilder;
     }
     
     @Override
@@ -70,6 +74,34 @@ public class TcController implements Controller {
                             l.product().label(),
                             l.product().price().excludingTaxes()));
                     });
+                System.out.println();
+            });
+        
+        
+        this
+            .orders
+            .all()
+            .stream()
+            .map(o -> this.invoiceBuilder.order(o).build())
+            .forEach(o -> {
+                System.out.println(String.format("#### %s", o.number()));
+                System.out.println();
+                o
+                    .lines()
+                    .stream()
+                    .forEach(l -> {
+                        System.out.println(String.format("* %d %s à %.2f",
+                            l.quantity(),
+                            l.product().label(),
+                            l.product().price().includingTaxes()));
+                    });
+                System.out.println(String.format(
+                    "Montant des taxes : %.2f",
+                    o.price().taxAmount()));
+                System.out.println(String.format(
+                    "Total : %.2f",
+                    o.price().includingTaxes()));
+                
                 System.out.println();
             });
         

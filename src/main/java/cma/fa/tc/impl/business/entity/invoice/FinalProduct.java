@@ -15,9 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cma.fa.tc.impl.business.entity.product;
+package cma.fa.tc.impl.business.entity.invoice;
 
 
+import cma.fa.tc.def.business.entity.Historisable;
 import cma.fa.tc.def.business.entity.Price;
 import cma.fa.tc.def.business.entity.PricedProduct;
 import java.util.Set;
@@ -29,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 import cma.fa.tc.def.business.entity.Tax;
 import cma.fa.tc.impl.business.entity.TcPricedProduct;
 import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 
 
 
@@ -39,7 +41,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of={"createdAt"}, callSuper=true)
 @ToString
 @Slf4j
-public class FinalProduct extends TcPricedProduct {
+public class FinalProduct extends TcPricedProduct implements Historisable {
     
     @Accessors(chain = true, fluent = true)
     @Getter
@@ -56,10 +58,10 @@ public class FinalProduct extends TcPricedProduct {
             code,
             label,
             unitPrice,
-            taxes/*
+            taxes
                 .stream()
                 .map(t -> new FinalTax((Tax) t, createdAt))
-                .collect(Collectors.toSet())*/,
+                .collect(Collectors.toSet()),
             price);
         this.createdAt = createdAt;
     }

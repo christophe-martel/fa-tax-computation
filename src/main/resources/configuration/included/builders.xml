@@ -42,4 +42,11 @@
         <constructor-arg ref="calculator.price.lines" />
     </bean>
     
+    <bean   id="builder.invoice"
+            class="cma.fa.tc.impl.business.builder.invoice.InvoiceBuilder"
+            scope="prototype" >
+        <constructor-arg ref="reference.invoice" />
+    </bean>
+    
+    
 </beans>

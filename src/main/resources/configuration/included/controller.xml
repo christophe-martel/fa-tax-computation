@@ -19,6 +19,7 @@
             class="cma.fa.tc.impl.controller.TcController"
             scope="prototype" >
         <constructor-arg ref="repository.orders" />
+        <constructor-arg ref="builder.invoice" />
     </bean>
     
     

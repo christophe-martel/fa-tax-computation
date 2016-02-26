@@ -50,8 +50,11 @@ public class TcPricedOrder extends TcOrder implements PricedOrder {
     private final Price price;
     
     public TcPricedOrder (Order order, Price price) {
-        super(order.number(), order.lines());
-        this.price = price;
+        this(order.number(), order.lines(), price);
     }
     
+    public TcPricedOrder (String number, Set<PricedLine> lines, Price price) {
+        super(number, lines);
+        this.price = price;
+    }
 }

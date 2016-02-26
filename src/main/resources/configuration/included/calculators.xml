@@ -29,4 +29,10 @@
             class="cma.fa.tc.impl.business.service.calculator.price.TcLinesPriceCalculator"
             scope="prototype" />
 
+    <bean   id="reference.invoice"
+            class="cma.fa.tc.impl.business.service.reference.TcInvoiceReference"
+            scope="prototype" />
+    
+    
+    
 </beans>

@@ -5,11 +5,15 @@
  */
 package cma.fa.tc.def.business.entity;
 
+import java.time.LocalDateTime;
 
 /**
  *
  * @author christophe
  */
-public interface PricedOrder extends Order , Priceable {
+public interface Historisable {
+    
+    public LocalDateTime createdAt ();
+    
     
 }

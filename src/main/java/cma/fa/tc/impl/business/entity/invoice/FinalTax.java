@@ -18,6 +18,14 @@
 package cma.fa.tc.impl.business.entity.invoice;
 
 
+import cma.fa.tc.def.business.entity.Historisable;
+import cma.fa.tc.impl.business.entity.TcTax;
+import cma.fa.tc.def.business.entity.Tax;
+import java.time.LocalDateTime;
+import lombok.ToString;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -25,8 +33,26 @@ import lombok.extern.slf4j.Slf4j;
  *
  * @author Christophe Martel <mail.christophe.martel@gmail.com>
  */
+@EqualsAndHashCode(of={"createdAt"}, callSuper=true)
+@ToString(callSuper=true)
 @Slf4j
-public class Line {
+public class FinalTax extends TcTax implements Historisable {
     
-
+    @Accessors(chain = true, fluent = true)
+    @Getter
+    private final LocalDateTime createdAt;
+    
+    public FinalTax (String code, float rate, LocalDateTime createdAt) {
+        super(code, rate);
+        this.createdAt = createdAt;
+    }
+    
+    public FinalTax (Tax tax, LocalDateTime createdAt) {
+        this(tax.code(), tax.rate(), createdAt);
+    }
+    
+    public FinalTax (Tax tax) {
+        this(tax.code(), tax.rate(), LocalDateTime.now());
+    }
+    
 }
