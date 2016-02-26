@@ -20,6 +20,8 @@ Cf. http://www.byatoo.com/la-rache/
     * `cd fa-tax-computation`
 * Prepare env
     * `mvn clean install`
+* Run test
+    * `mvn test`
 * Prepare package
     * `mvn package`
 * Run program
