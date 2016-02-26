@@ -14,6 +14,7 @@ import cma.fa.tc.impl.utils.exception.BusinessException;
 import cma.fa.tc.impl.utils.exception.TechnicalException;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -75,13 +76,11 @@ public class OrderBuilder {
             .product(product)
             .quantity(quantity)
             .build());
-        
         return this;
     }
     
-    public OrderBuilder products (Map<String, Integer> products) {
+    public OrderBuilder products (Set<Map.Entry<String, Integer>> products) {
         products
-            .entrySet()
             .stream()
             .forEach(e -> this.product(
                 this.productsProvider.byCode(e.getKey()),

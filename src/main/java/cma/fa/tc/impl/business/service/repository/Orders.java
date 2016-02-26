@@ -8,6 +8,7 @@ import cma.fa.tc.impl.utils.files.SimpleCsvReader;
 import java.util.AbstractMap;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -57,9 +58,7 @@ public class Orders extends Base<PricedOrder> {
                             List<String> parts = Arrays.asList(str.split("\\*", 2));
                             return new AbstractMap.SimpleEntry<>(parts.get(1), Integer.parseInt(parts.get(0), 10));
                         })
-                        .collect(Collectors.toMap(
-                            map -> map.getKey(),
-                            map -> map.getValue())))
+                        .collect(Collectors.toCollection(LinkedHashSet::new)))
                     .build()
                 ;
             })
