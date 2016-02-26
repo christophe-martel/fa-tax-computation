@@ -19,11 +19,8 @@ package cma.fa.tc.impl.controller;
 
 import cma.fa.tc.def.utils.exception.TcException;
 import cma.fa.tc.def.controller.Controller;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import lombok.Getter;
-import lombok.NonNull;
+import cma.fa.tc.impl.business.service.repository.Orders;
+import java.time.Clock;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -33,10 +30,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class TcController implements Controller {
     
+    private final Orders orders;
+    
     private long startTime;
+    
     private long endTime;
     
-    public TcController () {
+    public TcController (Orders orders) {
+        this.orders = orders;
     }
     
     @Override
@@ -53,6 +54,24 @@ public class TcController implements Controller {
         
         log.debug("run");
         
+        this
+            .orders
+            .all()
+            .stream()
+            .forEach(o -> {
+                System.out.println(String.format("#### %s", o.number()));
+                System.out.println();
+                o
+                    .lines()
+                    .stream()
+                    .forEach(l -> {
+                        System.out.println(String.format("* %d %s à %.2f",
+                            l.quantity(),
+                            l.product().label(),
+                            l.product().price().excludingTaxes()));
+                    });
+                System.out.println();
+            });
         
         this.endTime = System.currentTimeMillis();
         
