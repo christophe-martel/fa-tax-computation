@@ -6,12 +6,11 @@
 
 # Documentation
 ## Fonctionnelle
-[Tax Computation 2](documents/readme.md )
+[Tax Computation](documents/readme.md )
 ### Version 1.2
-* En cours de dev ...
-    * Sysout from controller
-    * mvn exec:exec
-    * Un peu d'audit ? `mvn sonar:sonar`
+* Sysout from controller
+* mvn exec:exec
+* bugfixing
 
 ### Version 1.1
 * First release
