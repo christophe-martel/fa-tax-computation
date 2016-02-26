@@ -76,7 +76,7 @@ public class PricedBuilderTest extends TestCase {
             .entrySet()
             .forEach(e -> assertEquals(
                 e.getValue(),
-                builder.product(products.byCode(e.getKey())).build().price().includingTaxes()))
+                builder.product(products.byCode(e.getKey()).get()).build().price().includingTaxes()))
         ;
         
     }

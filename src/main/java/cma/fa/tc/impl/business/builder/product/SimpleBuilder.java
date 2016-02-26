@@ -61,7 +61,7 @@ public class SimpleBuilder {
     
     
     public SimpleBuilder tax (String taxCode) {
-        this.taxes.add(this.taxesProvider.byCode(taxCode));
+        this.taxes.add(this.taxesProvider.byCode(taxCode).get());
         return this;
     }
     

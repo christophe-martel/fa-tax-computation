@@ -45,7 +45,7 @@ public class SimpleProductsTest extends TestCase {
         
         
         
-        assertEquals(9, products.all().size());
+        assertEquals(9, products.all().get().size());
         
     }
     

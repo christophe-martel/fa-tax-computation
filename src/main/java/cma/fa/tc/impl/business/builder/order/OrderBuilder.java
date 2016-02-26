@@ -83,7 +83,7 @@ public class OrderBuilder {
         products
             .stream()
             .forEach(e -> this.product(
-                this.productsProvider.byCode(e.getKey()),
+                this.productsProvider.byCode(e.getKey()).get(),
                 e.getValue()));
         
         return this;

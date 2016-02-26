@@ -58,7 +58,7 @@ public class OrdersTest extends TestCase {
                 new TcLinesPriceCalculator()));
         
         
-        assertEquals(3, orders.all().size());
+        assertEquals(3, orders.all().get().size());
         
         OrdersTest.executeAll(orders);
         
@@ -81,7 +81,7 @@ public class OrdersTest extends TestCase {
                 map -> map.getValue()))
             .entrySet()
             .forEach(e -> {
-                Price price = orders.one("number", e.getKey()).price();
+                Price price = orders.one("number", e.getKey()).get().price();
                 assertEquals(e.getValue().get(0), price.taxAmount());
                 assertEquals(e.getValue().get(1), price.includingTaxes());
             })

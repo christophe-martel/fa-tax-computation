@@ -61,49 +61,53 @@ public class TcController implements Controller {
         this
             .orders
             .all()
-            .stream()
-            .forEach(o -> {
-                System.out.println(String.format("#### %s", o.number()));
-                System.out.println();
-                o
-                    .lines()
-                    .stream()
-                    .forEach(l -> {
-                        System.out.println(String.format("* %d %s à %.2f",
-                            l.quantity(),
-                            l.product().label(),
-                            l.product().price().excludingTaxes()));
-                    });
-                System.out.println();
-            });
-        
-        
-        this
-            .orders
-            .all()
-            .stream()
-            .map(o -> this.invoiceBuilder.order(o).build())
-            .forEach(o -> {
-                System.out.println(String.format("#### %s", o.number()));
-                System.out.println();
-                o
-                    .lines()
-                    .stream()
-                    .forEach(l -> {
-                        System.out.println(String.format("* %d %s à %.2f",
-                            l.quantity(),
-                            l.product().label(),
-                            l.product().price().includingTaxes()));
-                    });
-                System.out.println(String.format(
-                    "Montant des taxes : %.2f",
-                    o.price().taxAmount()));
-                System.out.println(String.format(
-                    "Total : %.2f",
-                    o.price().includingTaxes()));
-                
-                System.out.println();
-            });
+            .fail(exception -> { log.error("Oups ... : {}", exception); })
+            .not(() -> { log.error("Hum... I can not found any data ...");})
+            .found(loadedOrders -> {
+                loadedOrders
+                .stream()
+                .forEach(o -> {
+                    System.out.println(String.format("#### %s", o.number()));
+                    System.out.println();
+                    o
+                        .lines()
+                        .stream()
+                        .forEach(l -> {
+                            System.out.println(String.format("* %d %s à %.2f",
+                                l.quantity(),
+                                l.product().label(),
+                                l.product().price().excludingTaxes()));
+                        });
+                    System.out.println();
+                });
+            })
+            .found(loadedOrders -> {
+                loadedOrders
+                .stream()
+                .map(o -> this.invoiceBuilder.order(o).build())
+                .forEach(o -> {
+                    System.out.println(String.format("#### %s", o.number()));
+                    System.out.println();
+                    o
+                        .lines()
+                        .stream()
+                        .forEach(l -> {
+                            System.out.println(String.format("* %d %s à %.2f",
+                                l.quantity(),
+                                l.product().label(),
+                                l.product().price().includingTaxes()));
+                        });
+                    System.out.println(String.format(
+                        "Montant des taxes : %.2f",
+                        o.price().taxAmount()));
+                    System.out.println(String.format(
+                        "Total : %.2f",
+                        o.price().includingTaxes()));
+
+                    System.out.println();
+                });
+            })
+        ;
         
         this.endTime = System.currentTimeMillis();
         

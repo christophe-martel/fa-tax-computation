@@ -53,7 +53,7 @@ public class SpringTest extends TestCase {
         
         Orders orders = (Orders) bean;
         
-        assertEquals(3, orders.all().size());
+        assertEquals(3, orders.all().get().size());
         
         OrdersTest.executeAll(orders);
     }

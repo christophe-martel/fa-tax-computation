@@ -14,12 +14,12 @@ import java.util.Set;
  */
 public interface Entity<T> {
     
-    public T byCode (String code);
+    public Returned<T> byCode (String code);
     
-    public T one (String property, String value);
+    public Returned<T> one (String property, String value);
     
-    public Set<T> by (String property, String value);
+    public Returned<Set<T>> by (String property, String value);
     
-    public Set<T> all ();
+    public Returned<Set<T>> all ();
     
 }

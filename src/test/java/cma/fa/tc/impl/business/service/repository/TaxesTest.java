@@ -46,7 +46,7 @@ public class TaxesTest extends TestCase {
         Taxes taxes = new Taxes(new SimpleCsvReader("/data/taxes.csv"));
         
         
-        assertEquals(5, taxes.all().size());
+        assertEquals(5, taxes.all().get().size());
         
     }
     
@@ -65,7 +65,7 @@ public class TaxesTest extends TestCase {
                 map -> map.getValue()))
             .entrySet()
             .forEach(e -> {
-                Tax t = taxes.byCode(e.getKey());
+                Tax t = taxes.byCode(e.getKey()).get();
                 assertEquals(e.getValue(), t.rate());
             });
         ;
