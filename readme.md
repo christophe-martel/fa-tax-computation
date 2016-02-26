@@ -12,6 +12,7 @@
 #### "La RACHE" method
 Cf. http://www.byatoo.com/la-rache/
 * `mvn exec:java`
+
 #### Step by step
 * Get sources
     * `git clone https://github.com/christophe-martel/fa-tax-computation.git`
